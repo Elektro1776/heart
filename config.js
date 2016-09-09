@@ -15,8 +15,18 @@ config = {
   // When running Ghost in the wild, use the production environment.
   // Configure your URL and mail settings here
   production : {
-    url : 'http://hcr.groupxinc.com',
-    mail : {},
+    url : 'http://heartcenteredrebalancing.com',
+    mail : {
+      transport : 'SMTP',
+      options : {
+        service : 'Mailgun',
+        auth : {
+          user :
+              'postmaster@sandbox64693ca142e14e93b60c4a87e7326ab9.mailgun.org', // mailgun username
+          pass : '882fdfc4ac6600fffb0ebbe62045ce56' // mailgun password
+        }
+      }
+    },
     database : {
       client : 'pg',
       connection : {
@@ -29,7 +39,7 @@ config = {
       debug : false
     },
 
-    server : {host : '127.0.0.1', port : '2368'}
+    server : {host : '127.0.0.1', port : '2367'}
   },
 
   // ### Development **(default)**

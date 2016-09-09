@@ -4,6 +4,31 @@
   /* Dom Loaded */
   $(document)
       .ready(function($) {
+        if ($('body').hasClass('post-template')) {
+          (function() {
+            var referer = "";
+            try {
+              if (referer = document.referrer, "undefined" == typeof referer)
+                throw "undefined"
+            } catch (exception) {
+              referer = document.location.href,
+              ("" == referer || "undefined" == typeof referer) &&
+                  (referer = document.URL)
+            }
+            referer = referer.substr(0, 700);
+            var rcel = document.createElement("script");
+            rcel.id = 'rc_' + Math.floor(Math.random() * 1000);
+            rcel.type = 'text/javascript';
+            rcel.src =
+                "http://trends.revcontent.com/serve.js.php?w=44100&t=" +
+                rcel.id + "&c=" + (new Date()).getTime() + "&width=" +
+                (window.outerWidth || document.documentElement.clientWidth) +
+                "&referer=" + referer;
+            rcel.async = true;
+            var rcds = document.getElementById("rcjsload_3d3aad");
+            rcds.appendChild(rcel);
+          })();
+        }
         var $window = $(window), ath = $('#addThis'),
             athScroll = $('#addThis_scroll');
 
@@ -122,11 +147,11 @@
               totalHeight = 0;
               articleHeight = $('.fade-1').children().not('.read-more');
               $el = $(this);
-              console.log($el);
+              //  console.log($el);
               $p = $el.parent();
-              console.log($p);
+              //  console.log($p);
               $up = $p.parent();
-              console.log($up);
+              //  console.log($up);
               $ps = $up.find(articleHeight);
 
               // measure how tall inside should be by adding together heights
@@ -156,13 +181,36 @@
 
         // INFINITE SCROLL
         // How we display the new posts  once the new posts are recieved
-
+        /*var rev = {
+          mobile : function mobile() {
+            var referer = "";
+            try {
+              if (referer = document.referrer, "undefined" == typeof referer)
+                throw "undefined"
+            } catch (exception) {
+              referer = document.location.href,
+              ("" == referer || "undefined" == typeof referer) &&
+                  (referer = document.URL)
+            }
+            referer = referer.substr(0, 700);
+            var rcel = document.createElement("script");
+            rcel.id = 'rc_' + Math.floor(Math.random() * 1000);
+            rcel.type = 'text/javascript';
+            rcel.src =
+                "http://trends.revcontent.com/serve.js.php?w=44102&t=" +
+                rcel.id + "&c=" + (new Date()).getTime() + "&width=" +
+                (window.outerWidth || document.documentElement.clientWidth) +
+                "&referer=" + referer;
+            rcel.async = true;
+            var rcds = document.getElementById("rcjsload_f02b55");
+            rcds.appendChild(rcel);
+          }
+        };*/
         function insertPost(postData) {
           var timeago = moment(postData.published_at).startOf('hour').fromNow();
           // console.log(timeago);
-
           var postInfo =
-              '<article class="post col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">\
+              '<article class="post col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">\
                           <a href="' +
               postData.url + '" class="local thumb hover-effect"><img src="' +
               postData.image + '"></a>\
@@ -171,14 +219,14 @@
               <div class="meta">\
               <div class="tags"></div>\
               <i class="fa fa-circle circle" ></i><span class="author">Heart Centered Rebalancing</span>\
-              <timeclass="post-date" datetime="' +
+              <time class="post-date" datetime="' +
               timeago + '">  <i class="fa fa-clock-o"></i>' + timeago +
               '</time>\
               <div class="row fade-out" style=margin-left:0;>\
               <div class="text">' +
               postData.html +
               '</div><p class="read-more"><a class="btn" href="#">"Read More"</a></p>\
-              <div class="clear"</div\
+              <div class="clear"></div>\
               </div>\
               </article>\
                           ';
@@ -203,10 +251,10 @@
                       })
                       .fail(function(err) { console.log(err); });
                 }
-                console.log($('.post').length);
+                // console.log($('.post').length);
               });
         }
-        console.log($('.post').length + "Im the initial");
+        // console.log($('.post').length + "Im the initial");
         $.fn.isOnScreen = function() {
 
           var win = $(window);
@@ -293,7 +341,7 @@
 
         /* Home */
 
-        if ($('section.tweets').length > 0 &&
+        /*if ($('section.tweets').length > 0 &&
             theme_config.twitter_username != '') {
           var username = theme_config.twitter_username;
           $('section.tweets h3').text('@' + username).show();
@@ -304,104 +352,104 @@
           var usernamepattern = /@+(\w+)/ig;
           var hashpattern = /#+(\w+)/ig;
           var pIMG, media, timestamp, abox, mtext;
-          var tweets = '';
+          var tweets = '';*/
 
-          /* Tweetcool fixes */
+        /* Tweetcool fixes */
 
-          //$.getJSON("https://www.api.tweecool.com/?screenname=" + username +
-          //"&count=" + limit, function(data) {
-          /*			$.getJSON("https://www.api.tweecool.com/?screenname="
-             +
-             username + "&count=" + limit, function(data) {
-                                          if (data.errors || data == null) {
-                                                  wrapper.html('No tweets
-             available.');
-                                                  return false;
-                                          }
+        //$.getJSON("https://www.api.tweecool.com/?screenname=" + username +
+        //"&count=" + limit, function(data) {
+        /*			$.getJSON("https://www.api.tweecool.com/?screenname="
+           +
+           username + "&count=" + limit, function(data) {
+                                        if (data.errors || data == null) {
+                                                wrapper.html('No tweets
+           available.');
+                                                return false;
+                                        }
 
-                                          $.each(data.tweets, function(i, field)
-             {
-                                                  mtext = field.text;
-                                                  tweets += '<div
-             class="item"><div class="tweets_txt">' + mtext.replace(urlpattern,
-             '<a href="$1" target="_blank">$1</a>').replace(usernamepattern, '<a
-             href="https://twitter.com/$1"
-             target="_blank">@$1</a>').replace(hashpattern, '<a
-             href="https://twitter.com/search?q=%23$1"
-             target="_blank">#$1</a>')+'</div></div>';
-                                          });
-                                          wrapper.html(tweets);
-                                          wrapper.slick({
-                                                  cssEase: 'ease',
-                                                  arrows: true,
-                                                  dots: false,
-                                                  infinite: false,
-                                                  variableWidth: false,
-                                                  swipe: true,
-                                                  vertical: true,
-                                                  slidesToShow: 1
-                                          });
-                                  }).fail(function(jqxhr, textStatus, error) {
-                                          wrapper.html('No tweets available.');
-                                  });
-                                  */
-          var get_tweets_config = {
-            id : theme_config.twitter_app_id,
-            domId : 'tweets',
-            maxTweets : theme_config.twitter_limit,
-            showImages : false,
-            showRetweet : false,
-            showTime : false,
-            showUser : false,
-            enableLinks : true,
-            customCallback : function(tweets) {
-              if (tweets) {
-                var x = tweets.length;
-                var n = 0;
-                var element = $('#tweets');
-                var html = '';
-                while (n < x) {
-                  html += '<div class="item"><div class="tweets_text">' +
-                          tweets[n] + '</div></div>';
-                  n++;
-                }
-              } else {
-                html = 'No tweets available';
+                                        $.each(data.tweets, function(i, field)
+           {
+                                                mtext = field.text;
+                                                tweets += '<div
+           class="item"><div class="tweets_txt">' + mtext.replace(urlpattern,
+           '<a href="$1" target="_blank">$1</a>').replace(usernamepattern, '<a
+           href="https://twitter.com/$1"
+           target="_blank">@$1</a>').replace(hashpattern, '<a
+           href="https://twitter.com/search?q=%23$1"
+           target="_blank">#$1</a>')+'</div></div>';
+                                        });
+                                        wrapper.html(tweets);
+                                        wrapper.slick({
+                                                cssEase: 'ease',
+                                                arrows: true,
+                                                dots: false,
+                                                infinite: false,
+                                                variableWidth: false,
+                                                swipe: true,
+                                                vertical: true,
+                                                slidesToShow: 1
+                                        });
+                                }).fail(function(jqxhr, textStatus, error) {
+                                        wrapper.html('No tweets available.');
+                                });
+                                */
+        /*var get_tweets_config = {
+          id : theme_config.twitter_app_id,
+          domId : 'tweets',
+          maxTweets : theme_config.twitter_limit,
+          showImages : false,
+          showRetweet : false,
+          showTime : false,
+          showUser : false,
+          enableLinks : true,
+          customCallback : function(tweets) {
+            if (tweets) {
+              var x = tweets.length;
+              var n = 0;
+              var element = $('#tweets');
+              var html = '';
+              while (n < x) {
+                html += '<div class="item"><div class="tweets_text">' +
+                        tweets[n] + '</div></div>';
+                n++;
               }
-              wrapper.html(html);
-              wrapper.slick({
-                cssEase : 'ease',
-                arrows : true,
-                dots : false,
-                infinite : false,
-                variableWidth : false,
-                swipe : true,
-                vertical : true,
-                slidesToShow : 1
-              });
+            } else {
+              html = 'No tweets available';
             }
-          };
-          twitterFetcher.fetch(get_tweets_config);
-        }
-
-        $('.tooltip')
-            .tooltipster({
-              theme : 'tooltipster-small',
-              contentAsHTML : true,
-              animation : 'grow'
+            wrapper.html(html);
+            wrapper.slick({
+              cssEase : 'ease',
+              arrows : true,
+              dots : false,
+              infinite : false,
+              variableWidth : false,
+              swipe : true,
+              vertical : true,
+              slidesToShow : 1
             });
-        $('.share-button')
-            .tooltipster({
-              theme : 'tooltipster-small',
-              contentAsHTML : true,
-              animation : 'grow',
-              interactive : true,
-              functionInit : function(origin, continueTooltip) {
-                return this.next().html();
-              }
-            });
+          }
+        };
+        twitterFetcher.fetch(get_tweets_config);
+      }/*
 
-        /* Featured Sections */
+      $('.tooltip')
+          .tooltipster({
+            theme : 'tooltipster-small',
+            contentAsHTML : true,
+            animation : 'grow'
+          });
+      $('.share-button')
+          .tooltipster({
+            theme : 'tooltipster-small',
+            contentAsHTML : true,
+            animation : 'grow',
+            interactive : true,
+            functionInit : function(origin, continueTooltip) {
+              return this.next().html();
+            }
+          });
+
+      /* Featured Sections */
 
         if ($('aside#featured .featured-top').length > 0) {
           $.get("/tag/featured-top", function(data) {
@@ -581,10 +629,15 @@
         //  $(window).smartresize(function(e) { wrapper.slick('setPosition');
         //  });
       });
-
-  var top =
-      $('.scroll-nav').offset().top -
-      parseFloat($('.ad-wrapper #ad_4').css('marginTop').replace(/auto/, 0));
+  /*var homeTop =
+          parseInt($('#aswift_2_expand').offset().top;*/
+  if ($('body').hasClass('post-template')) {
+    var postTop = parseInt($('#aswift_2_expand').offset().top -
+                           $('.scroll-nav').height());
+  }
+  if ($('body').hasClass('home-template')) {
+    var homeTop = parseInt($('#aswift_1_expand').offset().top);
+  }
   $(window)
       .scroll(function(event) {
         // console.log(top);
@@ -592,14 +645,23 @@
         var y = $(this).scrollTop();
         // console.log(y + "im this");
         // whether that's below the form
-        if (y >= top) {
-          console.log(y + ":" + top);
+        if (y >= postTop) {
+          // console.log(y + ":" + top);
           // if so, ad the fixed class
           $('.ad-wrapper #ad_4').addClass('fixed');
         } else {
           // otherwise remove it
           $('.ad-wrapper #ad_4').removeClass('fixed');
         }
+        if (y >= homeTop) {
+          // console.log(y + ":" + top);
+          // if so, ad the fixed class
+          $('.ad-wrapper #ad_1').addClass('fixed');
+        } else {
+          // otherwise remove it
+          $('.ad-wrapper #ad_1').removeClass('fixed');
+        }
+
       });
 
   /*  function initialize(lat, lng, zoom, location) {
