@@ -43,35 +43,34 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 {{ghost_head}}
-<!--<script type="text/javascript" src="{{@blog.url}}/config.js"></script>-->
+<script type="text/javascript">
+if (typeof jQuery == 'undefined') {
+  document.write('<script type="text/javascript" src="{{asset "js/jquery-1.11.3.min.js"}}"></'+'script>');
+}
+</script>
+<script type="text/javascript" src="{{asset "built/global.min.js"}}"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+<script type="text/javascript" src="{{@blog.url}}/config.js"></script>
 <script src="https://use.fontawesome.com/568e40764f.js"></script>
 
 
-<script type='text/javascript'>
-var googletag = googletag || {};
-googletag.cmd = googletag.cmd || [];
-(function() {
-var gads = document.createElement('script');
-gads.async = true;
-gads.type = 'text/javascript';
-var useSSL = 'https:' == document.location.protocol;
-gads.src = (useSSL ? 'https:' : 'http:') +
-'//www.googletagservices.com/tag/js/gpt.js';
-var node = document.getElementsByTagName('script')[0];
-node.parentNode.insertBefore(gads, node);
-})();
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78440791-2', 'auto');
+  ga('send', 'pageview');
+
 </script>
+
+
 </head>
 <body class=" {{#if @blog.cover}}cover{{/if}} {{body_class}}" {{#if @blog.cover}}style="background: url({{@blog.cover}}) no-repeat center center fixed;"{{/if}}>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1640664716197646";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<!-- start: #wrapper -->
+
 
 <div class="container">
 	<div class="row">
@@ -92,11 +91,22 @@ node.parentNode.insertBefore(gads, node);
 		</div>
     <!-- end: #wrapper -->
     {{ghost_foot}}
-	<script type="text/javascript">
-	if (typeof jQuery == 'undefined') {
-		document.write('<script type="text/javascript" src="{{asset "js/jquery-1.11.3.min.js"}}"></'+'script>');
-	}
-	</script>
+    <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+    '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+    })();
+    </script>
+  <div id="fb-root"></div>
+    <!-- start: #wrapper -->
 	<script type="text/javascript" src="{{asset "js/jquery-migrate-1.2.1.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/moment.min.js"}}"></script>
 	<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
@@ -110,20 +120,11 @@ node.parentNode.insertBefore(gads, node);
 	<script type="text/javascript" src="{{asset "js/tooltipster/jquery.tooltipster.min.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/jquery.debounce.js"}}"></script>
-  <script type="text/javascript" src="{{asset "built/global.min.js"}}"></script>
+
 	<script type="text/javascript" src="{{asset "js/bootstrap.min.js"}}"></script>
-	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-81613698-1', 'auto');
-  ga('send', 'pageview');
 
-</script>
-<!-- Go to www.addthis.com/dashboard to customize your tools-->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56b06d5aadd2e907"></script>
+
 <!--[if !IE]><!-->
 	<script type="text/javascript" src="{{asset "js/wow.min.js"}}"></script>
 	<script type="text/javascript">
@@ -134,6 +135,14 @@ node.parentNode.insertBefore(gads, node);
 			$('.wow').removeClass('wow opacity0');
 		}
 	</script>
+
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1640664716197646";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 	<!--<![endif]-->
 <!--	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
@@ -154,4 +163,6 @@ node.parentNode.insertBefore(gads, node);
 
 <!-- Desktop Revcon -->
 </body>
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56b06d5aadd2e907"></script>
 </html>

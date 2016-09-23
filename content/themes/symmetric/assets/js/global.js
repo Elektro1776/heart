@@ -56,7 +56,9 @@
           });
           $('.at-svc-stumbleupon .at-icon-wrapper').css({'display' : 'none'});
           // 2nd set Add this Buttons on Scroll
-          athScroll.addClass("col-xs-7 col-lg-4 col-lg-offset-3")
+          athScroll
+              .addClass(
+                  "col-xs-7 col-lg-4 col-md-5 col-lg-offset-3 col-md-offset-3")
               .css({
                 "display" : "inline-flex",
                 "clear" : "none",
@@ -181,69 +183,74 @@
 
         // INFINITE SCROLL
         // How we display the new posts  once the new posts are recieved
-        /*var rev = {
-          mobile : function mobile() {
-            var referer = "";
-            try {
-              if (referer = document.referrer, "undefined" == typeof referer)
-                throw "undefined"
-            } catch (exception) {
-              referer = document.location.href,
-              ("" == referer || "undefined" == typeof referer) &&
-                  (referer = document.URL)
-            }
-            referer = referer.substr(0, 700);
-            var rcel = document.createElement("script");
-            rcel.id = 'rc_' + Math.floor(Math.random() * 1000);
-            rcel.type = 'text/javascript';
-            rcel.src =
-                "http://trends.revcontent.com/serve.js.php?w=44102&t=" +
-                rcel.id + "&c=" + (new Date()).getTime() + "&width=" +
-                (window.outerWidth || document.documentElement.clientWidth) +
-                "&referer=" + referer;
-            rcel.async = true;
-            var rcds = document.getElementById("rcjsload_f02b55");
-            rcds.appendChild(rcel);
-          }
-        };*/
+
         function insertPost(postData) {
           var timeago = moment(postData.published_at).startOf('hour').fromNow();
-          // console.log(timeago);
+          // start the inserting of the html
           var postInfo =
-              '<article class="post col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">\
-                          <a href="' +
-              postData.url + '" class="local thumb hover-effect"><img src="' +
-              postData.image + '"></a>\
-              <h2 class="title"><a href="' +
-              postData.url + '">' + postData.title + '</a></h2>\
-              <div class="meta">\
-              <div class="tags"></div>\
-              <i class="fa fa-circle circle" ></i><span class="author">Heart Centered Rebalancing</span>\
-              <time class="post-date" datetime="' +
-              timeago + '">  <i class="fa fa-clock-o"></i>' + timeago +
-              '</time>\
-              <div class="row fade-out" style=margin-left:0;>\
-              <div class="text">' +
+              '<div class="meta">\
+            <a class="local" href="' +
+              postData.url +
+              '"><h1 class="title" id="post_title" style="font-family:Playfair Display;">' +
+              postData.title + '</h1></a>\
+              <div class="fb-like" data-href="https://www.facebook.com/HeartCenteredRebalancing" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>\
+                  <div class="row">';
+
+          postInfo += ' <time class="post-date" datetime="' + timeago +
+                      '">  <i class="fa fa-clock-o"></i>' + timeago + '</time>\
+                                  </div>';
+
+          postInfo += '<div class="main-image cover">\
+                          <img src="' +
+                      postData.image +
+                      '" style="width:100%" height="400" alt=""/>\
+                            <div class="center grid-container">\
+                              <div class="boxed cover" style="background: url("' +
+                      postData.url + '");"></div>\
+                              <div class="boxed overlay"></div>\
+                            </div>\
+                      </div>\
+                      <div class="center content section ">\
+                        <article class="post">\
+                          <section class="post-content" style="margin-bottom:50px;">\
+                          <div class="ad-container col-lg-4 col-xs-12"></div>'; // Ad
+          // should
+          // go
+          // here
+
+          postInfo +=
+              '<div class="row fade-out" style=margin-left:0;>\
+            <div class="text">' +
               postData.html +
-              '</div><p class="read-more"><a class="btn" href="#">"Read More"</a></p>\
-              <div class="clear"></div>\
-              </div>\
-              </article>\
-                          ';
-          // Where we drop our new post data onto the page
-          $('article').last().after(postInfo);
+              '</div><p class="read-more"><a class="btn" href="#">Read More</a></p>\
+            <div class="clear"></div>\
+            </div>\
+                          </section>\
+                        </article>\
+                      </div>\
+                </div>\
+            ';
+          // Append the html to the content of the blog
+          //$('article').last().after(postInfo);
+          $(postInfo).appendTo(".loaded_content");
+          // incriment next page so it will get the next page of posts if hit
+          // again.
         }
         // Are we on the post page? if so scroll the bitch
         // TODO figure out how to stop the infinte scroll after 20 articles are
         // loaded
+        var trueContent = false;
         if ($('body').hasClass('post-template')) {
+          var page = 2;
           $(window)
               .scroll(function() {
-                if ($(window).scrollTop() + $(window).height() ==
-                        $(document).height() &&
-                    $('.post').length <= 20) {
-                  $.getJSON(
-                       ghost.url.api('posts', {limit : 4, include : "author"}))
+                if ($window.scrollTop() + $window.height() >=
+                        parseInt($(document).height()) &&
+                    trueContent == false) {
+                  ++page;
+                  $.getJSON(ghost.url.api(
+                                'posts',
+                                {limit : 4, page : page, include : "author"}))
                       .done(function(data) {
                         $.each(data.posts,
                                function(i, post) { insertPost(post); });
@@ -635,9 +642,6 @@
     var postTop = parseInt($('#aswift_2_expand').offset().top -
                            $('.scroll-nav').height());
   }
-  if ($('body').hasClass('home-template')) {
-    var homeTop = parseInt($('#aswift_1_expand').offset().top);
-  }
   $(window)
       .scroll(function(event) {
         // console.log(top);
@@ -652,14 +656,6 @@
         } else {
           // otherwise remove it
           $('.ad-wrapper #ad_4').removeClass('fixed');
-        }
-        if (y >= homeTop) {
-          // console.log(y + ":" + top);
-          // if so, ad the fixed class
-          $('.ad-wrapper #ad_1').addClass('fixed');
-        } else {
-          // otherwise remove it
-          $('.ad-wrapper #ad_1').removeClass('fixed');
         }
 
       });

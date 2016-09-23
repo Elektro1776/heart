@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6,
 .slick-prev:before, .slick-next:before,
 div.tags a, div.tags span,
 div.meta a.comments:hover,
-.pagination a, .pagination span, .pagination a:hover, .pagination .current{ color: #000; }
+.pagination a, .pagination span, .pagination a:hover, .pagination .current{ }
 
 
 /*#header nav ul.menu > li > a:hover:before, #header nav ul.menu > li.current-menu-item > a:before,*/

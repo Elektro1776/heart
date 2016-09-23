@@ -35,7 +35,27 @@
 
 /* All Mobile Devices */
 @media screen and (max-width:400px){
-		h1.title {margin:-10px 0 20px;}
+		h1.title {margin:10px 0 20px;}
+		article time .fa, div.meta time {
+		    padding-left: 10px;
+		}
+		h1.title {margin:0px 0 0px;
+		}
+		.mobile-logo-words img {
+		top: 15px;
+		}
+		.mobile-logo_2 img{
+			top: 10px;
+		}
+		.no-padding-left{
+			padding-left:0px !important;
+		}
+		.info {
+		margin-top: -30px;
+		}
+		.main {
+    margin-top: 80px;
+	}
 	/*main-image{height:187px!important;}*/
 	.at-share-btn >.at-svc-stumbleupon {display:none!important;}
 	#atstbx.at-share-tbx-element .at-share-btn .at-icon-wrapper{
@@ -46,7 +66,7 @@
 	    width: 160px !important;
 	    position: relative;}
 	.addthis_sharing_toolbox{
-		clear:none!important;padding-left:15px;
+		clear:none!important;padding-left:15px;margin-top:5%!important;
 	}
 	#atstbx2 .at-share-btn-elements .at-svc-facebook:after{
 		left:36%!important;
@@ -74,6 +94,12 @@
 /* IPHONE 6 plus */
 @media screen and (min-width:400px) and (max-device-width : 736px){
 		h1.title {margin:-10px 0 20px;}
+		.mobile-logo-words img {
+    top: 10px;
+  	}
+		.info {
+		margin-top: -30px;
+		}
 	/*main-image{height:187px!important;}*/
 	.at-share-btn >.at-svc-stumbleupon {display:none!important;}
 	#atstbx.at-share-tbx-element .at-share-btn .at-icon-wrapper{
@@ -117,7 +143,7 @@
     float: right;
     position: relative;
     font-size: 21px;
-    padding-right: 30px;
+    padding-right: 15px;
 
 }
 @media screen and (min-width: 959px){
@@ -269,7 +295,7 @@ div.articles article div.post-excerpt{
 	.container {max-width:480px;}
 }
 @media screen and (max-width: 768px){
-	
+
 	#logo {margin-top: -5px;}
 
 		.mobile-logo{display:block!important;}
@@ -331,7 +357,6 @@ h1.title{
 #info_nav_Wrap_1{float:right!important;padding-left:1px;padding-right:0;}
 #info_nav_Wrap{margin-top:15px!important;}
 .mobile-logo-words {float:right;}
-.main{margin-top:0;}
 }
 @media screen and (max-width: 480px) {
 	body.post-template div.text{
@@ -344,7 +369,7 @@ h1.title{
 			position: relative;
 			z-index: 1;}*/
 }
-};
+
 /* ----------- iPhone 4 and 4S ----------- */
 
 /* Portrait and Landscape */
@@ -355,11 +380,11 @@ h1.title{
 	/*	#single div.main-image{ height: 187px !important; width:290px!important; margin-top: 40px; }
 	*/	#ad_1>img{display:none;}
 		#ad_3 img{display:none}
-		#post_title{font-size:24px;line-height:32px;}
+		#post_title{font-size:24px!important;line-height:32px!important;}
 		#header{ padding-top: 12px; height:80px; }
 		.main{margin-top:80px;}
 		.main{margin-top:60px;}
-			.main-image {height:300px; width:250px}
+			/*.main-image {height:300px; width:250px}*/
 		div.articles article h2.title {
 			font-size: 18px;
 	    line-height: 28px;
@@ -378,6 +403,7 @@ h1.title{
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
 	/*	.main-image{height:187px!important;}*/
+		#post_title{font-size:24px!important;line-height:32px!important;}
 }
 
 /* Landscape */
@@ -386,7 +412,7 @@ h1.title{
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-
+	#post_title{font-size:24px!important;line-height:32px!important;}
 }
 
 /* ----------- iPhone 5 and 5S ----------- */
@@ -399,8 +425,39 @@ h1.title{
 		/*#single div.main-image{ height: 187px !important; width:290px!important; margin-top: 40px; }
 	*/	#ad_1>img{display:none;}
 		#ad_3 img{display:none}
-		#post_title{font-size:24px;line-height:32px;}
+		#post_title{font-size:24px!important;line-height:1.5;}
 		#header{ padding-top: 12px; height:80px; }
+		div.tags a {
+		    font: bold 14px/1 'Roboto Condensed';
+		    color: #fff;
+		    background: #FCD665;
+		    display: inline-block;
+		    padding: 3px 10px;
+		    margin-right: 4px;
+		    margin-bottom: 4px;
+		    text-transform: uppercase;
+		    vertical-align: top;
+		    -webkit-border-radius: 3px;
+		    border-radius: 3px;
+		}
+		article time, div.meta time {
+    display: inline-block;
+    font-size: 14px;
+    color: #888;
+    font-family: 'Roboto Condensed';
+    font-weight: bold;
+    text-transform: uppercase;
+    vertical-align: middle
+		}
+		article time .fa, div.meta time {
+    padding-left: 5px;
+	}
+	.fb-like {
+    top: 0px;
+		}
+		.main {
+    margin-top: 40px;
+}
 
 }
 
@@ -410,6 +467,7 @@ h1.title{
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
+	#post_title{font-size:24px!important;line-height:32px!important;}
 }
 
 /* Landscape */
@@ -432,7 +490,7 @@ h1.title{
 		*/div.text p{margin-right:0 !important;}
 			#ad_1>img{display:none;}
 			#ad_3 img{display:none}
-			#post_title{font-size:24px;line-height:32px;}
+			#post_title{font-size:24px!important;line-height:32px;}
 			#header{ padding-top: 12px; height:10px; }
 			body.post-template div.meta{margin-top: 0;}
 			.main{margin-top:80px;}
@@ -445,7 +503,7 @@ h1.title{
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
-
+#post_title{font-size:24px!important;line-height:32px;}
 }
 
 /* Landscape */
@@ -468,9 +526,9 @@ h1.title{
     */div.text p{margin-right:0 !important;}
 			#ad_1>img{display:none;}
 			#ad_3 img{display:none}
-			#post_title{font-size:24px;line-height:32px;}
+			#post_title{font-size:24px!important;line-height:32px;}
 			#header{ padding-top: 12px; height:80px; }
-			.main{margin-top:100px;}
+			.main{margin-top:25px;}
 				.col-xs-6{width:50%;}
 }
 
@@ -480,7 +538,7 @@ h1.title{
   and (max-device-width: 736px)
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: portrait) {
-
+#post_title{font-size:24px!important;line-height:32px;}
 }
 
 /* Landscape */
@@ -645,10 +703,11 @@ and (orientation: portrait) {
 	    background-color: #fff;
 	    border: 0;
 	    -webkit-box-shadow: none;
-	    box-shadow: none;}
+	    box-shadow: none;
+			left:60px!important;}
 	/* @group Global Styles */
 
-	.section{ margin-top: 30px; }
+	.section{ margin-top: 80px; }
 	body{ overflow-x: hidden; }
 	body.cover div.center{ padding: 0 20px 20px; }
 
