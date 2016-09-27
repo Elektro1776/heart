@@ -181,13 +181,35 @@
 
         // END OF READ MORE BUTTON FADE OUT
 
+        var create_excerpt = function(html_input){
+          var tmpInnerText = $.parseHTML(html_input)[0].innerText
+          var expString = tmpInnerText.split(/\s+/, 20);
+          return expString.join(" ")
+        }
+
         // INFINITE SCROLL
         // How we display the new posts  once the new posts are recieved
 
-        function insertPost(postData) {
+        function insertPost(postData, onTagPage) {
           var timeago = moment(postData.published_at).startOf('hour').fromNow();
-          // start the inserting of the html
-          var postInfo =
+
+          var postInfo = "";
+
+          if(onTagPage){
+            var published_date = new Date(postData.published_at).toString().substr(4,11)
+            //console.log(create_excerpt(postData.html))
+            postInfo = '<article class="default col-md-12"><header><div class="col-md-6">\
+                        <a href="' + postData.url + '"<img src="' + postData.image + '"></a></div><div class="col-md-6">\
+                        <div id="meta"><div class="meta"><div id="time"><time><i class="fa fa-clock-o"></i>' + published_date + '</time>\
+                        </div><a href="' + postData.url  + '#comments' + '" class="comments alignright"><i class="fa fa-comment"></i>\
+                        <span class="disqus-comment-count">0</span></a><div class="clear"></div></div></div><div class="row"><div class="">\
+                        <h4 class="title tag-title"><a href="' + postData.url + '">' + postData.title + '</a></h4></div></div></header>\
+                        <div class=""><div class="post-excerpt">' + create_excerpt(postData.html) + '<a href="' + postData.url + '" class="continue_reading" style="opacity: .5;"> Continue Reading</a>\
+                        <i class="fa fa-angle-double-right"></i></div></div>'
+
+          } else {
+            // start the inserting of the html
+          postInfo =
               '<div class="meta">\
             <a class="local" href="' +
               postData.url +
@@ -213,23 +235,27 @@
                       <div class="center content section ">\
                         <article class="post">\
                           <section class="post-content" style="margin-bottom:50px;">\
-                          <div class="ad-container col-lg-4 col-xs-12"></div>'; // Ad
+                          <div class="ad-container col-lg-4 col-xs-12"></div>';
+            postInfo +=
+                '<div class="row fade-out" style=margin-left:0;>\
+              <div class="text">' +
+                postData.html +
+                '</div><p class="read-more"><a class="btn" href="#">Read More</a></p>\
+              <div class="clear"></div>\
+              </div>\
+                            </section>\
+                          </article>\
+                        </div>\
+                  </div>\
+              ';
+
+          }
+           // Ad
           // should
           // go
           // here
 
-          postInfo +=
-              '<div class="row fade-out" style=margin-left:0;>\
-            <div class="text">' +
-              postData.html +
-              '</div><p class="read-more"><a class="btn" href="#">Read More</a></p>\
-            <div class="clear"></div>\
-            </div>\
-                          </section>\
-                        </article>\
-                      </div>\
-                </div>\
-            ';
+
           // Append the html to the content of the blog
           //$('article').last().after(postInfo);
           $(postInfo).appendTo(".loaded_content");
@@ -240,7 +266,9 @@
         // TODO figure out how to stop the infinte scroll after 20 articles are
         // loaded
         var trueContent = false;
-        if ($('body').hasClass('post-template')) {
+        if ($('body').hasClass('post-template') || $('body').hasClass('tag-template')) {
+          var tagTemplate = $('body').hasClass('tag-template') ? true : false;
+          console.log('this shit should work')
           var page = 2;
           $(window)
               .scroll(function() {
@@ -248,19 +276,40 @@
                         parseInt($(document).height()) &&
                     trueContent == false) {
                   ++page;
-                  $.getJSON(ghost.url.api(
-                                'posts',
-                                {limit : 4, page : page, include : "author"}))
-                      .done(function(data) {
-                        $.each(data.posts,
-                               function(i, post) { insertPost(post); });
-                        // console.log('posts', data.posts);
-                      })
-                      .fail(function(err) { console.log(err); });
+
+                  if(tagTemplate){
+                    var tagName = "tag:" + location.pathname.slice(5).replace('/','')
+                    console.log('include tags from ' + tagName)
+                    $.getJSON(ghost.url.api(
+                                  'posts',
+                                  {limit : 4, page : page, include : ["author", "tags"], filter: tagName }))
+                        .done(function(data) {
+                          console.log(data)
+                          $.each(data.posts,
+                                 function(i, post) { insertPost(post, tagTemplate); });
+                          // console.log('posts', data.posts);
+                        })
+                        .fail(function(err) { console.log(err); });
+                  } else {
+                    $.getJSON(ghost.url.api(
+                                  'posts',
+                                  {limit : 4, page : page, include : "author"}))
+                        .done(function(data) {
+                          $.each(data.posts,
+                                 function(i, post) { insertPost(post); });
+                          // console.log('posts', data.posts);
+                        })
+                        .fail(function(err) { console.log(err); });
+                  }
+
+
                 }
                 // console.log($('.post').length);
               });
         }
+
+
+
         // console.log($('.post').length + "Im the initial");
         $.fn.isOnScreen = function() {
 
