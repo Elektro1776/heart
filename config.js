@@ -33,11 +33,19 @@ config = {
         host : '127.0.0.1',
         user : 'groupx',
         password : 'Austin1776#',
-        database : 'heart',
+        database : 'Google_Test_DB',
         charset : 'utf8'
       },
       debug : false
     },
+        storage: {
+active: 'gcloud',
+'gcloud': {
+    projectId: '703090694969',
+    key: 'key.json', // if is in the ghost root folder just add the name of the file
+    bucket: 'hcr'
+}
+},
 
     server : {host : '127.0.0.1', port : '2367'}
   },
