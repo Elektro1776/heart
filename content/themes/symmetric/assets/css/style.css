@@ -305,7 +305,11 @@ body.cover #single div.main-image .boxed.cover{
 	padding-left:5px;
 	padding-right:5px;
 	margin-top:-3px;
-
+}
+.menu-text{
+	font-size: 25px;
+	padding-left: 5px;
+	margin-top: 5px;
 }
 .new_nav img{width:100%;}
 .info{
