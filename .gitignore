@@ -38,6 +38,9 @@ jspm_packages
 
 #Images folder
 content/images/**
+#Database versioning doesnt need to keep being pushed
+content/data/**
+
 #config files for startup
 config.js
 config.example.js
