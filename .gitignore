@@ -38,6 +38,6 @@ jspm_packages
 
 #Images folder
 content/images/**
-
+#config files for startup
 config.js
 config.example.js
