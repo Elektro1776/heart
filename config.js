@@ -15,32 +15,40 @@ config = {
   // When running Ghost in the wild, use the production environment.
   // Configure your URL and mail settings here
   production : {
-    url : 'http://heartcenteredrebalancing.com',
-    mail : {
-      transport : 'SMTP',
-      options : {
-        service : 'Mailgun',
-        auth : {
-          user :
-              'postmaster@sandbox64693ca142e14e93b60c4a87e7326ab9.mailgun.org', // mailgun username
-          pass : '882fdfc4ac6600fffb0ebbe62045ce56' // mailgun password
+      url : 'http://heartcenteredrebalancing.com',
+      mail : {
+        transport : 'SMTP',
+        options : {
+          service : 'Mailgun',
+          auth : {
+            user :
+                'postmaster@sandbox64693ca142e14e93b60c4a87e7326ab9.mailgun.org', // mailgun username
+            pass : '882fdfc4ac6600fffb0ebbe62045ce56' // mailgun password
+          }
         }
-      }
-    },
-    database : {
-      client : 'pg',
-      connection : {
-        host : '127.0.0.1',
-        user : 'groupx',
-        password : 'Austin1776#',
-        database : 'heart',
-        charset : 'utf8'
       },
-      debug : false
-    },
-
-    server : {host : '127.0.0.1', port : '2368'}
+      database : {
+        client : 'pg',
+        connection : {
+          host : '127.0.0.1',
+          user : 'groupx',
+          password : 'Austin1776#',
+          database : 'Google_Test_DB',
+          charset : 'utf8'
+        },
+        debug : false
+      },
+          storage: {
+  active: 'gcloud',
+  'gcloud': {
+      projectId: '703090694969',
+      key: 'key.json', // if is in the ghost root folder just add the name of the file
+      bucket: 'hcr'
+  }
   },
+
+      server : {host : '127.0.0.1', port : '2367'}
+    },
 
   // ### Development **(default)**
   development : {
