@@ -199,7 +199,7 @@
             var published_date = new Date(postData.published_at).toString().substr(4,11)
             //console.log(create_excerpt(postData.html))
             postInfo = '<article class="default col-md-12"><header><div class="col-md-6">\
-                        <a href="' + postData.url + '"<img src="' + postData.image + '"></a></div><div class="col-md-6">\
+                        <a href="' + postData.url + '"><img src="' + postData.image + '"></a></div><div class="col-md-6">\
                         <div id="meta"><div class="meta"><div id="time"><time><i class="fa fa-clock-o"></i>' + published_date + '</time>\
                         </div><a href="' + postData.url  + '#comments' + '" class="comments alignright"><i class="fa fa-comment"></i>\
                         <span class="disqus-comment-count">0</span></a><div class="clear"></div></div></div><div class="row"><div class="">\
@@ -269,7 +269,7 @@
         if ($('body').hasClass('post-template') || $('body').hasClass('tag-template')) {
           var tagTemplate = $('body').hasClass('tag-template') ? true : false;
           console.log('this shit should work')
-          var page = 2;
+          var page = 3;
           $(window)
               .scroll(function() {
                 if ($window.scrollTop() + $window.height() >=
