@@ -39,7 +39,7 @@ config = {
       debug : false
     },
 
-    server : {host : '127.0.0.1', port : '2367'}
+    server : {host : '127.0.0.1', port : '2368'}
   },
 
   // ### Development **(default)**
