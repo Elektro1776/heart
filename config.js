@@ -27,7 +27,7 @@ config = {
           }
         }
 
-      },  
+      },
     database : {
       client : 'pg',
       connection : {
