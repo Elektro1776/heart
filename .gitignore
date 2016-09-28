@@ -39,5 +39,5 @@ jspm_packages
 #Images folder
 content/images/**
 
-var/www/heart/config.js
-var/www/heart/config.example.js
+config.js
+config.example.js
