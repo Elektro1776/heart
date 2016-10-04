@@ -58,11 +58,11 @@
           // 2nd set Add this Buttons on Scroll
           athScroll
               .addClass(
-                  "col-xs-7 col-lg-4 col-md-5 col-lg-offset-3 col-md-offset-3")
+                  "col-xs-6 col-lg-4 col-md-5")
               .css({
                 "display" : "inline-flex",
                 "clear" : "none",
-                "margin-top" : "10px"
+                "padding-bottom" : "10px"
               });
           var x2 = $('#atstbx2 a span'), y2 = $('#atstbx2 a span svg'),
               z2 = $('#atstbx2 .at-share-btn');
@@ -89,7 +89,7 @@
 
         var $trending = $(".trending"), // addThis = $('#addwrap'),
                                         //$mobileLogoD = $('.mobile-logo_3'),
-            $scrollNav = $('.new_nav_scroll'),
+            $scrollNav = $('.scroll-nav'),
             //  $logo_words = $(".mobile-logo-words"), $follow =
             //  $("#mobileFollow");
             post_header = parseInt($('.nav-wrap').offset().top, 10);
@@ -124,17 +124,17 @@
             $logo_words.css({'visibility' : 'hidden'});
           }*/
         });
-        if ($('body').hasClass('post-template')) {
-          var menuWrapper = $('.scroll-nav');
-          if ($(document).width() < 1440) {
-            menuWrapper.sticky({
-              zIndex : 1000,
-
-            });
-          } else {
-            menuWrapper.unstick();
-          }
-        }
+        // if ($('body').hasClass('post-template')) {
+        //   var menuWrapper = $('.scroll-nav');
+        //   if ($(document).width() < 1440) {
+        //     menuWrapper.sticky({
+        //       zIndex : 1000,
+        //
+        //     });
+        //   } else {
+        //     menuWrapper.unstick();
+        //   }
+        // }
         $('#ad_3').affix({offset : {top : 200}}).css("top", "70px");
 
         $('.row-wrap').siblings().wrapAll("<div class='row' /div>");
@@ -180,32 +180,71 @@
             });
 
         // END OF READ MORE BUTTON FADE OUT
-
-        var create_excerpt = function(html_input){
-          var tmpInnerText = $.parseHTML(html_input)[0].innerText
-          var expString = tmpInnerText.split(/\s+/, 20);
-          return expString.join(" ")
-        }
-
+      /*  var create_excerpt = function(html_input){
+          var tmpInnerText = $.parseHTML(html_input)
+          $.each(tmpInnerText, function(index,value){
+            tmpInnerText.push(value);
+          });
+          return tmpInnerText.join(" ")
+        }*/
+        var create_excerpt = function(b) {
+          var finalText=[];
+          var authorInnerText = $.parseHTML(b)[0].innerText;
+                   var tmpInnerText = $.parseHTML(b)[2].innerText;
+                   var exp1String = authorInnerText.split(/\s+/, 20);
+                    var expString = tmpInnerText.split(/\s+/, 20);
+                      finalText.push(exp1String.join(" "));
+                      finalText.push(expString.join(" "));
+                      console.log(finalText);
+                   return finalText;
+               };
         // INFINITE SCROLL
         // How we display the new posts  once the new posts are recieved
 
         function insertPost(postData, onTagPage) {
           var timeago = moment(postData.published_at).startOf('hour').fromNow();
-
+          console.log(create_excerpt(postData.html));
           var postInfo = "";
 
           if(onTagPage){
-            var published_date = new Date(postData.published_at).toString().substr(4,11)
+            var published_date = new Date(postData.published_at).toString().substr(4,11);
             //console.log(create_excerpt(postData.html))
-            postInfo = '<article class="default col-md-12"><header><div class="col-md-6">\
-                        <a href="' + postData.url + '"><img src="' + postData.image + '"></a></div><div class="col-md-6">\
-                        <div id="meta"><div class="meta"><div id="time"><time><i class="fa fa-clock-o"></i>' + published_date + '</time>\
-                        </div><a href="' + postData.url  + '#comments' + '" class="comments alignright"><i class="fa fa-comment"></i>\
-                        <span class="disqus-comment-count">0</span></a><div class="clear"></div></div></div><div class="row"><div class="">\
-                        <h4 class="title tag-title"><a href="' + postData.url + '">' + postData.title + '</a></h4></div></div></header>\
-                        <div class=""><div class="post-excerpt">' + create_excerpt(postData.html) + '<a href="' + postData.url + '" class="continue_reading" style="opacity: .5;"> Continue Reading</a>\
-                        <i class="fa fa-angle-double-right"></i></div></div>'
+            postInfo =  '<article class="default col-md-12 post ">\
+              						<header>\
+              							<div class="col-md-6 col-lg-6">\
+              							       <a class="thumb hover-effect" href="' + postData.url + '">\
+              												<img src="' + postData.image + '">\
+              											</a>\
+                                    </div>\
+                                 <div class="col-md-6 col-lg-6">\
+                    <div id="meta">\
+                      <div class="meta">\
+              											<div id="time">\
+                                  <time class="post-date" datetime="' + timeago +
+                                                '">  <i class="fa fa-clock-o"></i>' + timeago + '</time>\
+                                   </div>\
+                                    <div class="clear"></div>\
+                                    </div>\
+                                    </div>\
+                                    <div class="row">\
+                                    <div>\
+                                    <h4 class="title tag-title"><a href="' + postData.url + '">' + postData.title + '</a></h4>\
+                                    </div>\
+                                    </div>\
+                                    </header>\
+                                   <div>\
+                                        <div class="post-excerpt">' + create_excerpt(postData.html) + '<a href="' + postData.url + '" class="continue_reading" style="opacity: .5;"> Continue Reading</a>\
+                                    <i class="fa fa-angle-double-right"></i></div></div>\
+                                    </div>\
+                                  </article>\
+                                  ';
+
+
+
+
+
+
+
 
           } else {
             // start the inserting of the html
@@ -268,8 +307,10 @@
         var trueContent = false;
         if ($('body').hasClass('post-template') || $('body').hasClass('tag-template')) {
           var tagTemplate = $('body').hasClass('tag-template') ? true : false;
-          console.log('this shit should work')
+          //console.log(tagTemplate);
+          //console.log('bobs your uncle')
           var page = 3;
+
           $(window)
               .scroll(function() {
                 if ($window.scrollTop() + $window.height() >=
@@ -279,12 +320,12 @@
 
                   if(tagTemplate){
                     var tagName = "tag:" + location.pathname.slice(5).replace('/','')
-                    console.log('include tags from ' + tagName)
+                    //console.log('include tags from ' + tagName)
                     $.getJSON(ghost.url.api(
                                   'posts',
                                   {limit : 4, page : page, include : ["author", "tags"], filter: tagName }))
                         .done(function(data) {
-                          console.log(data)
+                          //console.log(data)
                           $.each(data.posts,
                                  function(i, post) { insertPost(post, tagTemplate); });
                           // console.log('posts', data.posts);
@@ -365,28 +406,67 @@
           */
         $('#header div.menu-mobile')
             .click(function() { $('#header')
-                                    .toggleClass('menu-open'); });
+                                    .toggleClass('menu-open'); })
 
-        $('#header form')
-            .submit(function() {
-              var search_text = $(this).find('.search-field').val();
-              $('#header form .search-field').val(search_text);
-              $('html, body').animate({scrollTop : 0}, 500);
-            });
-        $("form .search-field")
-            .ghostHunter({
-              results : "#search-results",
-              info_template :
-                  "<h2 class='title'>{{amount}} results for your search</h2>",
-              result_template :
-                  '<div class="box grid-50 tablet-grid-50"><article class="item"><h4 class="title"><a href="{{link}}">{{title}}</a></h4><p><time><i class="fa fa-clock-o"></i> {{pubDate}}</time></p></article></div>',
-              before : function() {
-                if ($('div.main-image.cover').length > 0) {
-                  $('#search-results').addClass('with-cover');
+    //       $(function(){
+    //       var $searchlink = $('#searchtoggl i');
+    //       var $searchbar  = $('.searchbar');
+    //         $('.searchtoggl').on('click', function(e){
+    //             e.preventDefault();
+    //             // if($(this).attr('id') == 'searchtoggl') {
+    //             // if(!$searchbar.is(":visible")) {
+    //             //   // if invisible we switch the icon to appear collapsable
+    //             // $searchlink.removeClass('fa-search').addClass('fa-search-minus');
+    //             // } else {
+    //             //         // if visible we switch the icon to appear as a toggle
+    //             //     $searchlink.removeClass('fa-search-minus').addClass('fa-search');
+    //             //   }
+    //             //     $searchbar.slideToggle("fast");
+    //             // }
+    //   });
+    //         $('#searchform').submit(function(e){
+    //           e.preventDefault(); // stop form submission
+    //           });
+    // });
+
+
+                var submitIcon = $('.searchbox-icon');
+                var inputBox = $('.searchbox-input');
+                var searchBox = $('.searchbox');
+                var isOpen = false;
+                submitIcon.click(function(){
+                    if(isOpen == false){
+                        searchBox.addClass('searchbox-open');
+                        inputBox.focus();
+                        isOpen = true;
+                    } else {
+                        searchBox.removeClass('searchbox-open');
+                        inputBox.focusout();
+                        isOpen = false;
+                    }
+                });
+                 submitIcon.mouseup(function(){
+                        return false;
+                    });
+                searchBox.mouseup(function(){
+                        return false;
+                    });
+                $(document).mouseup(function(){
+                        if(isOpen == true){
+                            $('.searchbox-icon').css('display','block');
+                            submitIcon.click();
+                        }
+                    });
+                  function buttonUp(){
+                    var inputVal = $('.searchbox-input').val();
+                    inputVal = $.trim(inputVal).length;
+                    if( inputVal !== 0){
+                        $('.searchbox-icon').css('display','none');
+                    } else {
+                        $('.searchbox-input').val('');
+                        $('.searchbox-icon').css('display','block');
+                    }
                 }
-                $('#search-results').fadeIn();
-              }
-            });
 
         $('#back-to-top')
             .click(function(event) {

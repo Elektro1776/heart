@@ -25,7 +25,6 @@
 <!-- <link rel="stylesheet" type="text/css" href="{{asset "css/grids.css"}}"> -->
 <link rel="stylesheet" type="text/css" href="{{asset "css/bootstrap.min.css"}}">
 <link rel="stylesheet" type="text/css" href="{{asset "css/owl.carousel.css"}}">
-
 <link rel="stylesheet" type="text/css" href="{{asset "css/owl.theme.css"}}">
 <link rel="stylesheet" type="text/css" href="{{asset "css/font-awesome.min.css"}}">
 <link rel="stylesheet" type="text/css" href="{{asset "css/common-elements.css"}}">
@@ -42,39 +41,39 @@
 <link rel="stylesheet" type="text/css" href="{{asset "css/grids-ie.css"}}">
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+
 {{ghost_head}}
+
 <script type="text/javascript">
 if (typeof jQuery == 'undefined') {
   document.write('<script type="text/javascript" src="{{asset "js/jquery-1.11.3.min.js"}}"></'+'script>');
 }
 </script>
-<script type="text/javascript" src="{{asset "built/global.min.js"}}"></script>
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="{{asset "js/global.js"}}"></script>
 
 <script type="text/javascript" src="{{@blog.url}}/config.js"></script>
 <script src="https://use.fontawesome.com/568e40764f.js"></script>
-
-
-
+<script type="text/javascript" src="//delivery.thebloggernetwork.com/3cf7ecf9-e410-42e7-a669-b8a304357f66.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-78440791-2', 'auto');
   ga('send', 'pageview');
-
 </script>
 
-
 </head>
-<body class=" {{#if @blog.cover}}cover{{/if}} {{body_class}}" {{#if @blog.cover}}style="background: url({{@blog.cover}}) no-repeat center center fixed;"{{/if}}>
 
-
+<body class="enable_animations  {{#if @blog.cover}}cover{{/if}} {{body_class}}" {{#if @blog.cover}}style="background: url({{@blog.cover}}) no-repeat center center fixed;"{{/if}} style="overflow:hidden;">
 <div class="container">
 	<div class="row">
 		{{> header}}
+    <div class="searchbar">
+			<form class="" action="/search" method="get">
+				<input type="text" name="q" value="{{query}}" placeholder="Search"style="background-color:#222;color:#fff" >
+			</form>
+		</div>
 	</div>
 </div>
 <div class="clear">
@@ -91,6 +90,8 @@ if (typeof jQuery == 'undefined') {
 		</div>
     <!-- end: #wrapper -->
     {{ghost_foot}}
+
+
     <script type='text/javascript'>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
@@ -105,7 +106,9 @@ if (typeof jQuery == 'undefined') {
     node.parentNode.insertBefore(gads, node);
     })();
     </script>
+
   <div id="fb-root"></div>
+
     <!-- start: #wrapper -->
 	<script type="text/javascript" src="{{asset "js/jquery-migrate-1.2.1.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/moment.min.js"}}"></script>
@@ -120,10 +123,7 @@ if (typeof jQuery == 'undefined') {
 	<script type="text/javascript" src="{{asset "js/tooltipster/jquery.tooltipster.min.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
 	<script type="text/javascript" src="{{asset "js/jquery.debounce.js"}}"></script>
-
 	<script type="text/javascript" src="{{asset "js/bootstrap.min.js"}}"></script>
-
-
 
 <!--[if !IE]><!-->
 	<script type="text/javascript" src="{{asset "js/wow.min.js"}}"></script>
@@ -143,7 +143,8 @@ if (typeof jQuery == 'undefined') {
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1640664716197646";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
-	<!--<![endif]-->
+
+<!--<![endif]-->
 <!--	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
 		var disqus_shortname = theme_config.disqus_shortname;
@@ -162,7 +163,6 @@ if (typeof jQuery == 'undefined') {
 		<!-- Mobile Revcon -->
 
 <!-- Desktop Revcon -->
-</body>
-
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56b06d5aadd2e907"></script>
+</body>
 </html>

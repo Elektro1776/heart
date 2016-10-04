@@ -41,20 +41,24 @@
 		}
 		h1.title {margin:0px 0 0px;
 		}
-		.mobile-logo-words img {
+		/*.mobile-logo-words img {
 		top: 15px;
-		}
+		}*/
 		.mobile-logo_2 img{
 			top: 10px;
 		}
 		.no-padding-left{
 			padding-left:0px !important;
 		}
-		.info {
-		margin-top: -30px;
-		}
+
 		.main {
     margin-top: 80px;
+	}
+	.trending{
+		display:none;
+	}
+	.info span{
+		display:none;
 	}
 	/*main-image{height:187px!important;}*/
 	.at-share-btn >.at-svc-stumbleupon {display:none!important;}
@@ -66,7 +70,7 @@
 	    width: 160px !important;
 	    position: relative;}
 	.addthis_sharing_toolbox{
-		clear:none!important;padding-left:15px;margin-top:5%!important;
+		clear:none!important;
 	}
 	#atstbx2 .at-share-btn-elements .at-svc-facebook:after{
 		left:36%!important;
@@ -78,25 +82,29 @@
 		width:	107%;
 	}
 	.post-template .fade-1{
-		width:	107%;
+
 		left: -5px;
 	}
 	.post-template .fade-out{
 		width:	107%;
 		left: -5px;
 	}
-
-
+.mobile-logo-words{
+	display:none;
+}
+.navbar-search{
+	display:none;
+}
 	.ad-container{
-		margin-left: -35px;
+		margin-left: -25px;
 	}
 }
 /* IPHONE 6 plus */
 @media screen and (min-width:400px) and (max-device-width : 736px){
 		h1.title {margin:-10px 0 20px;}
-		.mobile-logo-words img {
+		/*.mobile-logo-words img {
     top: 10px;
-  	}
+  	}*/
 		.info {
 		margin-top: -30px;
 		}
@@ -129,10 +137,25 @@
 		width:	107%;
 		left: -5px;
 	}
-
+	.mobile-logo-words{
+		display:none;
+	}
+	.navbar-search{
+		display:none;
+	}
 
 	.ad-container{
 		margin-left: -15px;
+	}
+	.trending{
+		display:none;
+	}
+	.info span{
+		display:none;
+	}
+	.info i{
+		font-size:4em !important;
+		margin-top:20px;
 	}
 }
 
@@ -299,7 +322,7 @@ div.articles article div.post-excerpt{
 	#logo {margin-top: -5px;}
 
 		.mobile-logo{display:block!important;}
-.mobile-logo-words{display:block!important;}
+/*.mobile-logo-words{display:block!important;}*/
 article.mainImg{
 	padding-right:15px!important;
 }
@@ -353,11 +376,13 @@ h1.title{
 /* SmartPhones and small tablets */
 @media screen and (max-device-width: 480px){
 /*	.main-image{height:250px!important;}*/
-#addThis_scroll{margin-top:10px!important;}
-#info_nav_Wrap_1{float:right!important;padding-left:1px;padding-right:0;}
+/*#addThis_scroll{margin-top:10px!important;}*/
+/*#info_nav_Wrap_1{padding-left:25px;}*/
 #info_nav_Wrap{margin-top:15px!important;}
-.mobile-logo-words {float:right;}
+/*.mobile-logo-words {float:right;}*/
 }
+
+
 @media screen and (max-width: 480px) {
 	body.post-template div.text{
 		font-size: 14px;
@@ -457,6 +482,10 @@ h1.title{
 		}
 		.main {
     margin-top: 40px;
+}
+.#info_nav_Wrap_1{
+	padding-bottom:10px;
+	padding-top:15px;
 }
 
 }
@@ -707,7 +736,7 @@ and (orientation: portrait) {
 			left:60px!important;}
 	/* @group Global Styles */
 
-	.section{ margin-top: 80px; }
+	/*.section{ margin-top: 80px; }*/
 	body{ overflow-x: hidden; }
 	body.cover div.center{ padding: 0 20px 20px; }
 

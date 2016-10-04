@@ -54,52 +54,34 @@
                     <div class="main-image"><img src="{{image}}"></div>
                   {{/if}}
                 </div>
-
             </header>
+
           {{/has}}
           <section class="post-content" style="margin-bottom:50px;">
+            
             <div class="ad-container col-lg-4 col-xs-12">
-            <script type="text/javascript"><!--
+              <!--TBN ATF 300x250 pos 1 STARTS-->
+              	<div id="tbn-c36c04fd-455a-3e7e-b314-7800a9ee86a3">
+              	     <script type="text/javascript">window.$tbn = window.$tbn || {"d":function(){}}; $tbn.d("c36c04fd-455a-3e7e-b314-7800a9ee86a3");</script>
+              	</div>
+              <!--TBN ATF 300x250 pos 1 ENDS-->
+            </div>
 
-google_ad_client = "ca-pub-2315916373893743";
-
-/* heartcenteredrebalancing.com 300x250 */
-
-google_ad_slot = "6796582565";
-
-google_ad_width = 300;
-
-google_ad_height = 250;
-
-//-->
-
-</script>
-
-<script type="text/javascript"
-
-src="//pagead2.googlesyndication.com/pagead/show_ads.js">
-
-</script>
-</div>
             <div class=" post_subscribe_form col-lg-7 col-md-6 col-sm-10">
                 {{subscribe_form placeholder="Your Email Here"}}
               </div>
-{{#if error}}
-  <p class="main-error">{{{error.message}}}</p>
-{{/if}}
+
+                {{#if error}}
+                  <p class="main-error">{{{error.message}}}</p>
+                {{/if}}
+
               <div class="row fade-out">
                   <div class="text">{{content}}</div>
                     <p class="read-more"><a class="btn" href="{{url}}">Read More</a></p>
               </div>
-
-
             </section>
         </article>
       </div>
   </div>
-
-
-
-
   {{/foreach}}
 {{/get}}

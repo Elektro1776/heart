@@ -27,7 +27,7 @@ config = {
           }
         }
 
-      },  
+      },
     database : {
       client : 'pg',
       connection : {
@@ -48,7 +48,7 @@ active: 'gcloud',
 }
 },
 
-    server : {host : '127.0.0.1', port : '2368'}
+    server : {host : '127.0.0.1', port : '2367'}
 
   },
 
