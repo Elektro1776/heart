@@ -42,5 +42,5 @@ content/images/**
 content/data/**
 
 #config files for startup
-config.js
-config.example.js
+./config.js
+./config.example.js    
