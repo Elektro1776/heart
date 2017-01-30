@@ -39,7 +39,7 @@ var q = req.query.q;
 //console.log(db.knex('posts'));
   if (q) {
       db.knex('posts')
-      .whereRaw('to_tsvector(title) @@ to_tsquery(?)',[q])
+      .whereRaw('to_tsvector(title) @@ plainto_tsquery(?)',[q])
       .andWhere('status', '=', "published")
       .limit(50)
        .then(function (results) {

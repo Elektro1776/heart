@@ -140,6 +140,9 @@
         $('.row-wrap').siblings().wrapAll("<div class='row' /div>");
         deBouncer(jQuery, 'smartresize', 'resize', 50);
 
+
+
+
         // FADE-OUT READ MORE button
         var $el, $p, $ps, $up, totalHeight, articleHeight;
 
@@ -180,6 +183,38 @@
             });
 
         // END OF READ MORE BUTTON FADE OUT
+        // Ad Injection for middle of main post content
+
+
+    /* (function(){
+          var textNodes = document.getElementById('main-text').children;
+          var textArray = $(textNodes).toArray();
+          var textLength = textArray.length;
+          var i = Math.ceil(textLength/2);
+          console.log(i);
+        // $(textArray[i]).after("<div id=tbn-acc828ff-71cc-bdba-9934-ad9aa81195d8></div>");
+         var iframe = document.createElement('iframe');
+         iframe.style.width = "300px";
+         iframe.style.height = "250px";
+         $(iframe).attr("id","myIframe");
+         //$(textArray[i]).after(iframe);
+         $('#ad_4').append(iframe);
+         var doc = document.getElementById('myIframe').contentWindow.document;
+             doc.open();
+             doc.write("<div id='tbn-6824972e-2777-1f3e-137f-a4d58d24a499'>"+"<script type='text/javascript'>window.$tbn = window.$tbn || {'d':function(){}}; $tbn.d('6824972e-2777-1f3e-137f-a4d58d24a499');</script>"+"</div>");
+             doc.close();
+             $(doc).find('head').append("<script type='text/javascript' src='//delivery.thebloggernetwork.com/3cf7ecf9-e410-42e7-a669-b8a304357f66.js'></script>");
+         //document.getElementById('myIframe').appendChild("<div id=tbn-acc828ff-71cc-bdba-9934-ad9aa81195d8></div>");
+         var s = document.createElement('script');
+             s.setAttribute('type', 'text/javascript');
+             s.innerHTML = "<script type='text/javascript'>window.$tbn = window.$tbn || {'d':function(){}}; $tbn.d('6824972e-2777-1f3e-137f-a4d58d24a499');</script> ";
+             document.getElementById('tbn-6824972e-2777-1f3e-137f-a4d58d24a499').appendChild(s);
+
+         //window.$tbn = window.$tbn || {"d":function(){}}; $tbn.d("acc828ff-71cc-bdba-9934-ad9aa81195d8");
+
+       })();
+*/
+       //document.getElementById('tbn-acc828ff-71cc-bdba-9934-ad9aa81195d8').append("<script type='text/javascript'>" + "window.$tbn = window.$tbn || {'d':function(){}}; $tbn.d('acc828ff-71cc-bdba-9934-ad9aa81195d8;' + '</' + 'script>'");
       /*  var create_excerpt = function(html_input){
           var tmpInnerText = $.parseHTML(html_input)
           $.each(tmpInnerText, function(index,value){

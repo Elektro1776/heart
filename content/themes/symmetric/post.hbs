@@ -5,6 +5,15 @@
 
 <!-- start: #single -->
 <div class="container content-wrap">
+	<div class="hidden-xs col-lg-4 col-sm-4 pull-right">
+		<div class="ad-wrapper" id="ad_4">
+			<!--TBN BTF 300x250 pos 2 STARTS-->
+			<div id="tbn-6824972e-2777-1f3e-137f-a4d58d24a499">
+				     <script type="text/javascript">window.$tbn = window.$tbn || {"d":function(){}}; $tbn.d("6824972e-2777-1f3e-137f-a4d58d24a499");</script>
+				</div>
+			<!--TBN BTF 300x250 pos 2 ENDS-->
+		</div>
+	</div>
 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<main id="single" class="main " role="main">
 		{{#post}}
@@ -68,7 +77,11 @@
 								{{/has}}
 								<section class="post-content " style="z-index:999;margin-bottom:50px;">
 									<div class="ad-container col-lg-4 col-md-4 ">
-
+										<!--TBN ATF 300x250 pos 1 STARTS-->
+			              <div id=tbn-acc828ff-71cc-bdba-9934-ad9aa81195d8>
+			                   <script type='text/javascript'>window.$tbn = window.$tbn || {'d':function(){}}; $tbn.d('acc828ff-71cc-bdba-9934-ad9aa81195d8'); </script>
+											     </div>
+			              <!--TBN ATF 300x250 pos 1 ENDS
 												<script id="mNCC" language="javascript">
 												  medianet_width = "300";
 												  medianet_height = "250";
@@ -79,12 +92,13 @@
 												      var mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=8CU3XYIRI' + (isSSL ? '&https=1' : '');
 												      document.write('<scr' + 'ipt type="text/javascript" id="mNSC" src="' + mnSrc + '"></scr' + 'ipt>');
 												  })();
-												</script>
+												</script>-->
 										</div>
 
 											<div class="  post_subscribe_form col-lg-7 col-md-6 col-sm-10 col-xs-12">
 													{{subscribe_form placeholder="Your Email Here"}}
 												</div>
+
 
 											<!--<div class="row" style="clear:left;"-->
 												<div class="addthis_sharing_toolbox col-lg-4 col-md-6 col-sm-10 col-xs-12 " style="float:right;margin-top:20%;"></div>
@@ -92,12 +106,35 @@
 													{{#if error}}
 													    <p class="main-error">{{{error.message}}}</p>
 													{{/if}}
-												<div class=" fade-1">
-											    <div class="text">{{content}}</div>
+													<script type="text/javascript">
+													window._ttf = window._ttf || [];
+													_ttf.push({
+														pid          : 1
+														,vast        : 'http://a.teads.tv/vast/get/1550'
+														,lang        : "en"
+														,slot        : '#post-area #content-area > p'
+														,format      : "inread"
+														,components  : { skip: {delay : 0}}
+														,css         : "margin: 0px auto 10px; max-width: 550px;"
+													});
+
+													(function (d) {
+														var js, s = d.getElementsByTagName('script')[0];
+														js = d.createElement('script');
+														js.async = true;
+														js.src = '//cdn.teads.tv/media/format.js';
+														s.parentNode.insertBefore(js, s);
+													})(window.document);
+													</script>
+												<div id="post-area" class=" fade-1">
+														<div id="content-area">
+											    <div id="main-text" class="text">{{content}}</div>
+												</div>
 														<p class="read-more"><a class="btn" href="#">Read More</a></p>
 										    </div>
 		              </section>
 							</article>
+						</div>
 						<div id="rcjsload_3d3aad"></div>
 
 		      </div>
@@ -110,15 +147,10 @@
 </main>
 <!-- end: #single -->
 </div>
-<div class="hidden-xs col-lg-4 col-sm-4 pull-right">
-	<div class="ad-wrapper" id="ad_4">
-		<!--TBN BTF 300x250 pos 2 STARTS-->			<div id="tbn-6824972e-2777-1f3e-137f-a4d58d24a499">
-			     <script type="text/javascript">window.$tbn = window.$tbn || {"d":function(){}}; $tbn.d("6824972e-2777-1f3e-137f-a4d58d24a499");</script>
-			</div>
-		<!--TBN BTF 300x250 pos 2 ENDS-->
-	</div>
-</div>
+
 <div class="clear"></div>
+<div class="container">
+
 	<div class=" col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<section class="related grid-container grid-parent">
 			<h3 class="title bordered">RELATED POSTS</h3>
@@ -127,4 +159,5 @@
 			</div>
 		</section>
 	</div>
+</div>
 </div>

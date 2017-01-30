@@ -14161,7 +14161,7 @@ jQuery(document).ready(function() {
 });
 
 /**
- * Sinon.JS 1.17.5, 2016/07/26
+ * Sinon.JS 1.17.6, 2016/09/19
  *
  * @author Christian Johansen (christian@cjohansen.no)
  * @author Contributors: https://github.com/cjohansen/Sinon.JS/blob/master/AUTHORS
@@ -15501,6 +15501,13 @@ var sinon = (function () {
 
             var error, wrappedMethod, i;
 
+            function simplePropertyAssignment() {
+                wrappedMethod = object[property];
+                checkWrappedMethod(wrappedMethod);
+                object[property] = method;
+                method.displayName = property;
+            }
+
             // IE 8 does not support hasOwnProperty on the window object and Firefox has a problem
             // when using hasOwn.call on objects from other frames.
             var owned = object.hasOwnProperty ? object.hasOwnProperty(property) : hasOwn.call(object, property);
@@ -15533,11 +15540,17 @@ var sinon = (function () {
                     mirrorProperties(methodDesc[types[i]], wrappedMethodDesc[types[i]]);
                 }
                 Object.defineProperty(object, property, methodDesc);
+
+                // catch failing assignment
+                // this is the converse of the check in `.restore` below
+                if ( typeof method === "function" && object[property] !== method ) {
+                    // correct any wrongdoings caused by the defineProperty call above,
+                    // such as adding new items (if object was a Storage object)
+                    delete object[property];
+                    simplePropertyAssignment();
+                }
             } else {
-                wrappedMethod = object[property];
-                checkWrappedMethod(wrappedMethod);
-                object[property] = method;
-                method.displayName = property;
+                simplePropertyAssignment();
             }
 
             method.displayName = property;
@@ -20078,6 +20091,10 @@ if (typeof sinon === "undefined") {
             },
 
             restore: function () {
+                if (arguments.length) {
+                    throw new Error("sandbox.restore() does not take any parameters. Perhaps you meant stub.restore()");
+                }
+
                 sinon.collection.restore.apply(this, arguments);
                 this.restoreContext();
             },
@@ -21014,11 +21031,15 @@ define('ember-test-helpers/abstract-test-module', ['exports', 'klassy', 'ember-t
     },
 
     setupTestElements: function setupTestElements() {
-      if (!document.querySelector('#ember-testing')) {
+      var testEl = document.querySelector('#ember-testing');
+      if (!testEl) {
         var element = document.createElement('div');
         element.setAttribute('id', 'ember-testing');
 
         document.body.appendChild(element);
+        this.fixtureResetValue = '';
+      } else {
+        this.fixtureResetValue = testEl.innerHTML;
       }
     },
 
@@ -21056,7 +21077,7 @@ define('ember-test-helpers/abstract-test-module', ['exports', 'klassy', 'ember-t
     },
 
     teardownTestElements: function teardownTestElements() {
-      document.getElementById('ember-testing').innerHTML = '';
+      document.getElementById('ember-testing').innerHTML = this.fixtureResetValue;
 
       // Ember 2.0.0 removed Ember.View as public API, so only do this when
       // Ember.View is present

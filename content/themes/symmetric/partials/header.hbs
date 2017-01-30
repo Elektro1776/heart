@@ -61,7 +61,10 @@
 														 </div>
 														 <div class="info navbar-search col-lg-4 col-sm-6 col-xs-1">
 																 <!-- <a href="#" id="searchtoggl" class="searchtoggl"><i class="navbar-search fa fa-search" aria-hidden="true"></i></a> -->
-															  <input type="text" placeholder="What're we looking for ?">
+																 <form class="" action="/search" method="get">
+													 				<input type="text" name="q" value="{{query}}" placeholder="What're we looking for ?" >
+													 			</form>
+
 																<label >
 																       <i class="navbar-search fa fa-search" aria-hidden="true"></i>
 																</label>
